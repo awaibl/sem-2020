@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         images[5] = findViewById(R.id.image_6);
         images[6] = findViewById(R.id.image_7);
         images[7] = findViewById(R.id.image_8);
-        //images[8] = findViewById(R.id.image_9);
+        images[8] = findViewById(R.id.image_9);
 
         prepareGrid();
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         images[5].setOnTouchListener(this);
         images[6].setOnTouchListener(this);
         images[7].setOnTouchListener(this);
-        //images[8].setOnTouchListener(this);
+        images[8].setOnTouchListener(this);
 
     }
 
@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
-
-    //Übung 1
-    ImageButton[] imageButtons = new ImageButton[9];
 
     public void prepareGrid() {
         File picture = new File(getFilesDir(), "my_picture.jpg");
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                 //Übung 1
                 for (int i = 0; i < images.length; i++) {
-                    imageButtons[i].setImageBitmap(grid[i]);
+                    images[i].setImageBitmap(grid[i]);
                 }
 
             } catch (Exception e) {
