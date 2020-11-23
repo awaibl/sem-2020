@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         images[5] = findViewById(R.id.image_6);
         images[6] = findViewById(R.id.image_7);
         images[7] = findViewById(R.id.image_8);
-        images[8] = findViewById(R.id.image_9);
+        //images[8] = findViewById(R.id.image_9);
 
         prepareGrid();
 
@@ -57,7 +56,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         images[5].setOnTouchListener(this);
         images[6].setOnTouchListener(this);
         images[7].setOnTouchListener(this);
-        images[8].setOnTouchListener(this);
+        //images[8].setOnTouchListener(this);
+
+        images[0].setEnabled(true);
+        images[1].setEnabled(true);
+        images[2].setEnabled(true);
+        images[3].setEnabled(true);
+        images[4].setEnabled(true);
+        images[5].setEnabled(true);
+        images[6].setEnabled(true);
+        images[7].setEnabled(true);
+        //images[8].setEnabled(true);
+        
 
     }
 
@@ -104,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     //Übung 1
-    public Bitmap[] cut (Bitmap source){
+   /* public Bitmap[] cut (Bitmap source){
         Bitmap [] grid = new Bitmap[9];
 
         int size = source.getHeight() / 3;
@@ -119,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         return grid;
 
-    }
+    }*/
 
     public Bitmap cropImage(Bitmap source) {
         int x = 0;
@@ -138,6 +148,39 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
 
         return Bitmap.createBitmap(source, x, y, size, size, matrix, true);
+    }
+
+    //Übung 2
+    public int[] move(int pos){
+
+        int[] moveable = new int[0];
+
+        if(pos == 1){
+            images[1].setEnabled(false);
+            images[3].setEnabled(false);
+
+            moveable = new int[]{2, 4};
+
+            return moveable;
+        }else if(pos == 2){
+            images[0].setEnabled(false);
+            images[2].setEnabled(false);
+            images[4].setEnabled(false);
+
+            moveable = new int[]{1, 3, 5};
+
+           
+        }else if(pos == 3){
+            images[2].setEnabled(false);
+            images[6].setEnabled(false);
+
+            moveable = new int[]{2, 6};
+
+        }
+
+
+        return moveable;
+
     }
 
     @Override
