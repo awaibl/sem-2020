@@ -103,5 +103,6 @@ public class CameraActivity extends AppCompatActivity {
                         Log.e(TAG, exception.getMessage());
                     }
                 });
+
     }
 }

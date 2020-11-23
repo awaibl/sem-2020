@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="takePicture"
     tools:context=".CameraActivity">
 
 
@@ -23,10 +24,10 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="takePicture">
 
     </androidx.camera.view.PreviewView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

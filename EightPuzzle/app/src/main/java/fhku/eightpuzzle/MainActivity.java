@@ -8,19 +8,27 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     protected static final String TAG = "MAIN";
 
+    protected ImageView image1;
+    protected ImageView image2;
+    protected ImageView image3;
     protected ImageView image4;
     protected ImageView image5;
     protected ImageView image6;
+    protected ImageView image7;
+    protected ImageView image8;
+    protected ImageView image9;
     protected ImageView[] images = new ImageView[8];
 
     @Override
@@ -36,14 +44,30 @@ public class MainActivity extends AppCompatActivity {
         images[5] = findViewById(R.id.image_6);
         images[6] = findViewById(R.id.image_7);
         images[7] = findViewById(R.id.image_8);
+        //images[8] = findViewById(R.id.image_9);
 
         prepareGrid();
+
+        //Übung 1
+        images[0].setOnTouchListener(this);
+        images[1].setOnTouchListener(this);
+        images[2].setOnTouchListener(this);
+        images[3].setOnTouchListener(this);
+        images[4].setOnTouchListener(this);
+        images[5].setOnTouchListener(this);
+        images[6].setOnTouchListener(this);
+        images[7].setOnTouchListener(this);
+        //images[8].setOnTouchListener(this);
+
     }
 
     public void openCamera(View view) {
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
+
+    //Übung 1
+    ImageButton[] imageButtons = new ImageButton[9];
 
     public void prepareGrid() {
         File picture = new File(getFilesDir(), "my_picture.jpg");
@@ -52,13 +76,16 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
                 Bitmap[] grid = gridImage(cropImage(bitmap));
 
+                //Übung 1
                 for (int i = 0; i < images.length; i++) {
-                    images[i].(grid[i]);
+                    imageButtons[i].setImageBitmap(grid[i]);
                 }
+
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
             }
         }
+
     }
 
     public Bitmap[] gridImage(Bitmap source) {
@@ -79,6 +106,24 @@ public class MainActivity extends AppCompatActivity {
         return grid;
     }
 
+    //Übung 1
+    public Bitmap[] cut (Bitmap source){
+        Bitmap [] grid = new Bitmap[9];
+
+        int size = source.getHeight() / 3;
+        int i = 0;
+
+        for(int row = 0; row < 3; row++){
+            for(int col = 0; col < 3; col++){
+                grid[i] = Bitmap.createBitmap(source,col * size, row * size, size, size);
+                i++;
+            }
+        }
+
+        return grid;
+
+    }
+
     public Bitmap cropImage(Bitmap source) {
         int x = 0;
         int y = 0;
@@ -96,5 +141,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return Bitmap.createBitmap(source, x, y, size, size, matrix, true);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
     }
 }
